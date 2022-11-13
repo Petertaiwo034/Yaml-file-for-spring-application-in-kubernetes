@@ -66,3 +66,6 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+
+#Deploy a load-generator container:
+kubectl run -i --tty load generator --rm --image=busybox /bin/sh
