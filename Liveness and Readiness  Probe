@@ -1,4 +1,5 @@
-#This will be under the under the sub under container spec ( So use the tab key to place it under the spec container data)
+##This will be placeas a sub under container spec ( So use the tab key to place it under the spec container data
+      readinessProbe:
 # This is use to run health check, the container can't start it will continue to start the container 
 livenessProbe:
       httpGet:
@@ -12,4 +13,9 @@ livenessProbe:
       
       Readiness
       #it ensure the container doesn't route network to a container unless it's ready. 
-      
+      #This will be placeas a sub under container spec ( So use the tab key to place it under the spec container data
+      readinessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
