@@ -69,3 +69,4 @@ spec:
 
 #Deploy a load-generator container:
 kubectl run -i --tty load generator --rm --image=busybox /bin/sh
+while true; do wget -q -O- http://hpaclusterservice; done
