@@ -1,0 +1,68 @@
+#To be able to do horizontal auto scaler you have to install a metric server
+#To deploy metric server for auto scaling
+#Run this command
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+#This will be in the kube system namespace
+#To check run the command 
+kubectl get deploy -n kube-system
+
+#To demonstrate a HorizontalPodAutoscaler, you will first start a Deployment that runs a container using the hpa-example image, 
+#and expose it as a Service using the following manifest:
+#How to write deployment object yaml for Auto scaling
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-apache
+spec:
+  selector:
+    matchLabels:
+      run: php-apache
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: php-apache
+    spec:
+      containers:
+      - name: php-apache
+        image: registry.k8s.io/hpa-example
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-apache
+  labels:
+    run: php-apache
+spec:
+  ports:
+  - port: 80
+  selector:
+    run: php-apache
+    
+#You have to create an horizontal pod auto scaling object
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: php-apache
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: php-apache
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50

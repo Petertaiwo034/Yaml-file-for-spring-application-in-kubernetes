@@ -1,7 +1,0 @@
-#To be able to do horizontal auto scaler you have to install a metric server
-#To deploy metric server for auto scaling
-#Run this command
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-#This will be in the kube system namespace
-#To check run the command 
-kubectl get deploy -n kube-system
