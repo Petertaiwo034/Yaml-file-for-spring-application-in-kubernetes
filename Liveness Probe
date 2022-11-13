@@ -1,0 +1,15 @@
+#This will be under the under the sub under container spec ( So use the tab key to place it under the spec container data)
+# This is use to run health check, the container can't start it will continue to start the container 
+livenessProbe:
+      httpGet:
+        path: /healthz (it will not the /healthz, you have to delete the healthz and write the path to your application)
+        port: 8080
+        httpHeaders:
+        - name: Custom-Header
+          value: Awesome
+      initialDelaySeconds: 3
+      periodSeconds: 3
+      
+      Readiness
+      #it ensure the container doesn't route network to a container unless it's ready. 
+      
