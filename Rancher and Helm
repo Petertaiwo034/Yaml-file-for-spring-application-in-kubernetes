@@ -1,0 +1,59 @@
+#Rancher is a graphical user interface for kubernetes
+#It provide a kubernetes platform
+#WIth Rancher we can Import and manage multiple Kubernetes
+#We can create clusters like EKS/AKS/GKE
+#Racher provide dashboards for kubernetes
+#Rancher is deployed using docker
+#To install Rancher on docker use the command below
+docker run -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged rancher/rancher:latest
+
+#How to integrate an existing cluster into Rancher
+1. Click on Home
+2. select import existing cluster
+3. Follow all the prompt
+4. Copy and Run the command that will show in the dashboard 
+
+#If your comapny alone give you the website address to the rancher website to run your workload. To access kubernetes on the cli:
+1. On top of the rancher dashbord, beside the "Only User Namespace" to the right you will see a sign like "sim-card" which is the "KubeConfig"
+2. Download it and copy it
+3. Go to the cli an dlogin into a server
+4. vi .kube/config and paste the "KubeConfig" file into it
+5. This will allow you to run your workload
+
+
+
+#Note
+#If you hAVE imported a cluster to rancher before it will create some name space like "cattle fleet" fi you want to import the cluster to another Rancher
+You have to delete the cattle namespace. To delete use the command:
+
+
+#HELMS
+Helm chart is basically just a collection of manifest files organized in a specific directory structure that describe a related kubernetes resource
+
+#How to install Helm 3
+#vi into helm.sh and patse the commands below
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+$ chmod 700 get_helm.sh
+$ ./get_helm.sh
+Now run the command uning sh helm.sh
+Now you can run helm command
+1. helm create javaapp
+2. This will create the javaapp and you can cd into it and ls to see the chart in it
+3. helm template javaapp : This will automatically vi into a manifest template yaml file
+4. helm show values javaapp: This is where values are created into the templates
+5. If you not satisfy with what is values you can redirect it using the command: helm show values javaapp > anyname you like e.g value.yaml
+6. This will automatically create a value.yaml file in which you can vi into and edit
+7. if you cd into the templates directory and ls, you will see alot of kubernetes templates object yaml file like deployment.yaml, service.yaml etc
+
+To deploy the application
+Run the command "helm install name you want to give to your deployment name of the helm you created which was javaapp here -f name of the file you 
+redirect the value file into e.g helm intall app29 javaapp/ -f value.yaml
+if you have run the install command and made a changes in the file again to effect the changes use the commang "helm upgrade"
+
+Create Custom heml charts for application
+Push helm charts into helm repositories 
+Update existing helm charts into helm repositories
+Use helm 
+
+How to add helm repository to your cluster using github pages
+Create a repository in your github and go to the repository settings and on the left side you will see pages. Click on it to copy the github page url
