@@ -55,5 +55,30 @@ Push helm charts into helm repositories
 Update existing helm charts into helm repositories
 Use helm 
 
+
 How to add helm repository to your cluster using github pages
-Create a repository in your github and go to the repository settings and on the left side you will see pages. Click on it to copy the github page url
+Step 1: Create a folder and a GitHub repository. ...
+Step 2: Clone the GitHub repository. ...
+Step 3: Add robots.txt at the root location of the repository. ...
+echo -e “User-Agent: *\nDisallow: /” > robots.txt 
+Step 4: Package your Helm chart. ...
+Helm package charts/observability-service/ 
+Step 5: Finally, create the index.yaml file for the Helm repository.
+Helm repo index --url <github_repository_path> . 
+Now run 
+git status 
+git add . 
+git commit -m "your_commit_message"
+git config --global user.name "petertaiwo034"
+git config --global user.email "petertaiwo034@gmail.com"
+git remote add pl "git repository url"
+git push alias name branch name
+Step 7: Create GitHub Pages once the code is pushed to GitHub 
+Go to settings of your GitHub repository -> Pages:
+Select your branch in the Source section.
+Click on Save.
+You will find a link for your public Helm chart repository. 
+Click on the link and wait for some time to see your README.md contents on the screen, as shown below.
+
+To add your file into the helm repository
+Helm repo add "name of the chart created using helm"  <github_repository_path_page> 
