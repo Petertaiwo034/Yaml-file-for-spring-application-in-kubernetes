@@ -81,4 +81,78 @@ You will find a link for your public Helm chart repository. 
 Click on the link and wait for some time to see your README.md contents on the screen, as shown below.
 
 To add your file into the helm repository
-Helm repo add "name of the chart created using helm"  <github_repository_path_page> 
+Helm repo add "name of the file in the repo"  <github_repository_path_page> 
+
+
+Nginx InGress
+Since we can't give our user the Node IP and NodePort to access the application. We have to go and craete a DNS for it on route 53
+If we have created a name DNS for the user to acess it we need to create ingress to integrate the DNS name and the service we created for the application 
+together.
+Installing Nginx Ingress controller using Helm
+1. git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v2.4.1
+2. cd kubernetes-ingress/deployments/helm-chart
+3. Adding the Helm Repository
+This step is required if you’re installing the chart via the helm repository.
+$ helm repo add nginx-stable https://helm.nginx.com/stable
+$ helm repo update
+$ helm search repo nginx-ingress
+$ helm install nginx nginx-ingress/nginx-ingress
+$ helm template nginx-ingress/nginx-ingress
+$ helm show values nginx-ingress/nginx-ingress
+
+Now create an Ingress object yaml file
+Host-based routing ( This is for multiple Application)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wildcard-host
+spec:
+  rules:
+  - host: "foo.bar.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/bar"
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+  - host: "*.foo.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/foo"
+        backend:
+          service:
+            name: service2
+            port:
+              number: 80
+              
+Path-based routing ( This is for Micro-services)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple-fanout-example
+spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - path: /foo
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 4200
+      - path: /bar
+        pathType: Prefix
+        backend:
+          service:
+            name: service2
+            port:
+              number: 8080
+
+
+
