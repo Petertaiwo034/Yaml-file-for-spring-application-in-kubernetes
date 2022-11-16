@@ -6,4 +6,6 @@ Use the command "kubectl create ns apm" to create a namespace
 Use the command "kubectl config set-content --current --namespace=apm" to get into the namespace
 helm repo add apm https://charts.heml.sh/stable 
 helm search repo apm | grep prometheus (select the first one)
-heml intsall "they first name you saw after you search and grep for prometheus" apm/prometheus
+heml intsall prometheus "they first name you saw after you search and grep for prometheus" apm/prometheus
+You can run "helm template apm/prometheus"
+You can run "helm show value apm/prometheus
