@@ -32,7 +32,24 @@ helm install kibana elastic/kibana -n efk (you don't have to run -f since the va
 
 You don't have to create a Nodeport or Loadbalncer for kibana when instaklling because it already install ingress when installing it
 We will create an ingress group using ingress kubernetes objects using host base routing
-
-
-Use the same process to install filebeat
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: KIBANA
+spec:
+  ingressClassName:nginx
+  rules:
+  - host: KIBANA.DOMINION.COM 
+    http:
+      paths:
+      - pathType: Prefix
+        path: 
+        backend:
+          serviceName: USE kubectl get svc -n efk to see the name of the service created for kibana to input it here
+            port: USE kubectl get svc -n efk to see the port under service created for kibana to input it here
+GO TO AWS TO CREATE HOSTNAME KIBANA.DOMINION.COM USING  ROUTE53 
+            
+            
+            
+ Use the same process to install filebeat
 helm install filebeat elastic/filebeats
