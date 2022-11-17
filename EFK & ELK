@@ -1,0 +1,38 @@
+Elastic Stack is a group of open-source applications from Elastic designed to take data from any source and in any format and then search, analyze, and visualize 
+that data in real time.  it was formerly known as ELK stack which means Elasticsearch, Logstash and Kibana. 
+Ekasticsearch : is used to store logs
+kibana: To search, view and interact with data stored in Elasticseach indices , allowing advance data analyis and visualizing data in a variety of charts, tables and maps.
+Beats: are open source data shippers that can be installed as agents on servers to send operational data directly to Elasticsearch or via Logstash
+Logstash: a powerfool tool that integrates with a wide variety of deployments. 
+
+In few words
+Filebeats collecs data from the log files and sends it to logstash
+Logstash enhances the data and sends it to Elasticsearch
+Elasticsearch store and indexes the data
+Kibana displays the data stored in Elasticsearch
+
+
+Instal EFK using Helm
+kubectl create ns efk
+helm repo add elastic https://helm.elastic.co
+helm repo update
+helm repo seaech elastic
+helm show values elastic/elasticseach >>elasticseach.values
+#To deploy elatic search in the efk namespace you ave to pass -ns efk
+#Since you alreeady redirected the values to another values and you have edited somenthing in it pass -f name of the file your redirected into
+helm install elastic elastic/elasticseach -ns efk -f elasticserach.values
+
+
+To install kibana
+Since the elasic repo has been added to your helm and it has kibana
+heml repo show elastic
+#you will see elastic/kibana
+heml show value elastic/kibana
+helm install kibana elastic/kibana -n efk (you don't have to run -f since the values was not redirected to another file neither was the values changed)
+
+You don't have to create a Nodeport or Loadbalncer for kibana when instaklling because it already install ingress when installing it
+We will create an ingress group using ingress kubernetes objects using host base routing
+
+
+Use the same process to install filebeat
+helm install filebeat elastic/filebeats
