@@ -37,6 +37,7 @@ $ chmod 700 get_helm.sh
 $ ./get_helm.sh
 Now run the command uning sh helm.sh
 Now you can run helm command
+Create a directory for helm chart using mkdir helm chart and cd into it (Not required)
 1. helm create javaapp
 2. This will create the javaapp and you can cd into it and ls to see the chart in it
 3. helm template javaapp : This will automatically vi into a manifest template yaml file
