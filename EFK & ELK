@@ -16,7 +16,7 @@ Instal EFK using Helm
 kubectl create ns efk
 helm repo add elastic https://helm.elastic.co
 helm repo update
-helm repo seaech elastic
+helm repo search elastic
 helm show values elastic/elasticseach >>elasticseach.values
 #To deploy elatic search in the efk namespace you ave to pass -ns efk
 #Since you alreeady redirected the values to another values and you have edited somenthing in it pass -f name of the file your redirected into
