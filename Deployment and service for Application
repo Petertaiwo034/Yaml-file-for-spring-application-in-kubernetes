@@ -52,3 +52,20 @@ spec:
       targetPort: 8080
       nodePort: 30000
 ~                      
+HOW TO WRITE YAML FILE FOR IMAGE IN PRIVATE REPOSITORY
+1. Create a secret for your docker credential
+
+
+
+When creating deployment object for you application for an image in private repository. You have to pass the "imagePullSecrets" it could be above
+the container name or below as it is below:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-reg
+spec:
+  containers:
+  - name: private-reg-container
+    image: <your-private-image>
+  imagePullSecrets:
+  - name: regcred
