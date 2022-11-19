@@ -54,8 +54,14 @@ spec:
 ~                      
 HOW TO WRITE YAML FILE FOR IMAGE IN PRIVATE REPOSITORY
 1. Create a secret for your docker credential
-
-
+apiVersion: v1
+kind: Secret
+metadata:
+    name: spring-secret
+type: Opaque
+data:
+  Docker-username: dXNlcm5hbWU=
+  Docker-password: cGFzc3dvcmQ=
 
 When creating deployment object for you application for an image in private repository. You have to pass the "imagePullSecrets" it could be above
 the container name or below as it is below:
