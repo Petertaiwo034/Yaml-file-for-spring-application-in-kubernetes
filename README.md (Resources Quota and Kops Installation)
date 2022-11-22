@@ -152,3 +152,6 @@ sh -i ~/.ssh/id_rsa ubuntu@ipAddress
 ssh -i ~/.ssh/id_rsa ubuntu@3.90.203.23
   
 ``
+To run kubectl commands on kop server without having to ssh into the master node
+
+kops export kubecfg $NAME --admin
