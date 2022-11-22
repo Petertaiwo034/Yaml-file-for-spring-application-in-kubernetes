@@ -8,9 +8,9 @@ helm repo add prometheus https://charts.helm.sh/stable
 helm search repo prometheus  (select the one that says prometheus/prometheus)
 You can run "helm show value prometheus
 if you don't like what is written in it, run this command
-helm show value prometheus > value.yml
+helm show value prometheus/prmetheus > value.yml
 Then vi into value.yml to edit it to what you want
-You can run "helm template prometheus"
+You can run "helm template prometheus/prometheus"
 heml intsall prometheus "they first name you saw after you search for prometheus" prometheus/prometheus
 If you redirect the show values into another file to install the changes you made in the new file erun this command
 helm install prometheus promethus/prometheus -f value.yml
@@ -26,7 +26,7 @@ How to install Grafana
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo updates
 helm search repo grafana
-helm show value grafana
+helm show value grafana/grafana
 helm template grafana
 heml install grafana "name you want after you ran helm search repo" grafana/grafana -n apm
 
