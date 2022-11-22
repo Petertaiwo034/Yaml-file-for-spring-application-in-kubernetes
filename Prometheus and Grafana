@@ -4,7 +4,7 @@ Prometheus can check for request time
 To install Prometheus
 Use the command "kubectl create ns apm" to create a namespace
 Use the command "kubectl config set-content --current --namespace=apm" to get into the namespace
-helm repo add prometheus https://charts.heml.sh/stable 
+helm repo add prometheus https://charts.helm.sh/stable 
 helm search repo prometheus  (select the one that says prometheus/prometheus)
 You can run "helm show value prometheus
 if you don't like what is written in it, run this command
