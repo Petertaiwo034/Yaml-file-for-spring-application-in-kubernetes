@@ -23,7 +23,7 @@ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged rancher/
 
 
 #Note
-#If you hAVE imported a cluster to rancher before it will create some name space like "cattle fleet" fi you want to import the cluster to another Rancher
+#If you hAVE imported a cluster to rancher before it will create some name space like "cattle fleet" if you want to import the cluster to another Rancher
 You have to delete the cattle namespace. To delete use the command:
 
 
