@@ -29,6 +29,7 @@ You have to delete the cattle namespace. To delete use the command:
 
 #HELMS
 Helm chart is basically just a collection of manifest files organized in a specific directory structure that describe a related kubernetes resource
+Helm is a package manager for kubernetes
 
 #How to install Helm 3
 #vi into helm.sh and patse the commands below
@@ -41,15 +42,27 @@ Create a directory for helm chart using mkdir helm chart and cd into it (Not req
 1. helm create javaapp
 2. This will create the javaapp and you can cd into it and ls to see the chart in it
 3. helm template javaapp : This will automatically vi into a manifest template yaml file
-4. helm show values javaapp: This is where values are created into the templates
-5. If you not satisfy with what is values you can redirect it using the command: helm show values javaapp > anyname you like e.g value.yaml
-6. This will automatically create a value.yaml file in which you can vi into and edit
-7. if you cd into the templates directory and ls, you will see alot of kubernetes templates object yaml file like deployment.yaml, service.yaml etc
+4.You can cd into "javapp" that was created and you will see the charts, template and value files
+5.You can "vi" into the value file and change the necessary field 
+6 You can now run "helm install "anyname you like" "javapp which is the name of the chart you created"
+
+OR
+
+7. helm show values javaapp: This is where values are created into the templates
+8. If you not satisfy with what is values you can redirect it using the command: helm show values javaapp > anyname you like e.g value.yaml
+9. This will automatically create a value.yaml file in which you can vi into and edit
+10. if you cd into the templates directory and ls, you will see alot of kubernetes templates object yaml file like deployment.yaml, service.yaml etc
 
 To deploy the application
 Run the command "helm install name you want to give to your deployment name of the helm you created which was javaapp here -f name of the file you 
 redirect the value file into e.g helm intall app29 javaapp/ -f value.yaml
 if you have run the install command and made a changes in the file again to effect the changes use the commang "helm upgrade"
+
+In helm to change to another version or upgrade to another verzion 
+1. You have to vi into the value.yaml file in the chart ccreated and change the neccesary things like the image name and tag
+2. Then use the command " helm upgrade "the name you gave to the application before" "Name of your chart"
+
+
 
 Create Custom heml charts for application
 Push helm charts into helm repositories 
