@@ -97,7 +97,32 @@ spec:
   4. Same asthe url http://sevice name
   
   We were suppose to configure prometheus before we deploy it to configure the how alert can be triggered
-  
+  1. Redirect the file into a new created file to edit it using
+  helm show value prometheus > prometheus value.yml
+  2. Look for the "alert manager File" and under it you will see "receivers"  configure all details to what you want
+  receivers:
+    - name: Petertaiwo034@gmail.com
+      email_cinfigs:
+      - to: petertaiwo034@gmail.com
+        from:
+        smarthost: 
+        auth_username:
+        auth_identity;
+        auth_password:
+        send_resolved: true
+        headers:
+        
+  Under server file you need to configure the alert rules e.g
+  alerting_rules.yml
+    groups:
+    - name: NodeDown
+      rules:
+      #Alert for any instance that is unreachable for >5 minutes
+      - alert: Inastance Down
+        expr: up{job="kubernetes-nodes"} = 0
+        for:2h
+  or you can use a custom file by vi into promtheus.yaml file and paste the custom yaml script for prometheus in there and run 
+  helm ugrade prometheus prometheus/prometheus -f prometheus.yaml
   
   
   
