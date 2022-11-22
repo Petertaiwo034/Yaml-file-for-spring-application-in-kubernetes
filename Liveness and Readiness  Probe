@@ -3,7 +3,7 @@
 # This is use to run health check, the container can't start it will continue to start the container 
 livenessProbe:
       httpGet:
-        path: /healthz (it will not the /healthz, you have to delete the healthz and write the path to your application)
+        path: /healthz (it will not /healthz, you have to delete the healthz and write the path to your application)
         port: 8080
         httpHeaders:
         - name: Custom-Header
@@ -19,3 +19,40 @@ livenessProbe:
         port: 8080
       initialDelaySeconds: 5
       periodSeconds: 10
+
+
+Hoe to write a complete deployment object including Liveness probe and Readiness
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: javawebapprs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+       app: javawebapp
+  template:
+    metadata:
+      name: javawebapppod
+      labels:
+        app: javawebapp
+    spec:
+      containers:
+      - name: javawebappcontainer
+        image: mylandmarktech/java-web-app
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /java-web-app
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 15
+        livenessProbe:
+          httpGet:
+            path: /java-web-app
+            port: 8080
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+          periodSeconds: 15 
