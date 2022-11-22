@@ -46,5 +46,44 @@ And for grafana the service to integerate with nginx ingress so as ton access on
 To assess this on the browser you have to create a nginx ingress
 Go to route 53 and create A records for the application 
 
-Create a host based ingress.yal file 
+Create a host based ingress.yal file
 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wildcard-host
+spec:
+  rules:
+  - host: prometheus server.com (input the host name you created for the first application here)
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: prometheus server ( service name for the application )
+            port:
+              number: 80  ( what port is the application running on)
+  - host: prometheus-alertmanager.net (input the host name you created for the second application here)
+    http:
+      paths:
+      - pathType: Prefix 
+        path: /
+        backend:
+          service:
+            name: prometheus-alertmanager ( service name for the application )
+            port:
+              number: 80( what port is the application running on)
+  - host: grafana.taiwo.com (input the host name you created for the third application here)
+    http:
+      paths:
+      - pathType: Prefix 
+        path: /
+        backend:
+          service:
+            name: grafana ( service name for the application )
+            port:
+              number: 80( what port is the application running on)
+              
+
+              
