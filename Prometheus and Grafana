@@ -86,4 +86,30 @@ spec:
               number: 80( what port is the application running on)
               
 
-              
+  Grafana is going to be use majorly for display
+  When you access grafana on the browser it will request for a password, run the command you copied when you deployed grafana, the Number 1 on the 3 numbers
+  note you got when you deployed grafana and this will decode the password for you, copy and paste it on the browser. The username is admin
+  
+  You have to configure the data source on grafana browser
+  1. click on data source
+  2. Select promtheus
+  3. The name must be the same with your prometheus services name
+  4. Same asthe url http://sevice name
+  
+  We were suppose to configure prometheus before we deploy it to configure the how alert can be triggered
+  
+  
+  
+  
+  
+  DASHBOARD
+  To access it, move the cursor to the left side of the screen and the fourth diagram that look like a four small square is the dashboard
+  1. Sample Dash Board IDS: These  are different dashboard IDS created by different developer
+  3119, 7249,8919,6417,11074
+  2. in the first box that has "import via grafana.com" I can inputany of the number and click on load
+  3. This will bring another templete, below you will see promethus. Select the data source you created earlier
+  4. Click on import
+  
+  
+  
+  
