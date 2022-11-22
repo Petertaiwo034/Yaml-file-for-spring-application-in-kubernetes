@@ -4,9 +4,10 @@ Prometheus can check for request time
 To install Prometheus
 Use the command "kubectl create ns apm" to create a namespace
 Use the command "kubectl config set-content --current --namespace=apm" to get into the namespace
-helm repo add prometheus https://charts.helm.sh/stable 
+helm repo add prometheus https://prometheus-community.github.io/helm-charts
+ 
 helm search repo prometheus  (select the one that says prometheus/prometheus)
-You can run "helm show value prometheus
+You can run "helm show value "the type you say when you ran search repo" prometheus/prometheus
 if you don't like what is written in it, run this command
 helm show value prometheus/prmetheus > value.yml
 Then vi into value.yml to edit it to what you want
@@ -96,35 +97,9 @@ spec:
   3. The name must be the same with your prometheus services name
   4. Same asthe url http://sevice name
   
-  We were suppose to configure prometheus before we deploy it to configure the how alert can be triggered
-  1. Redirect the file into a new created file to edit it using
-  helm show value prometheus > prometheus value.yml
-  2. Look for the "alert manager File" and under it you will see "receivers"  configure all details to what you want
-  receivers:
-    - name: Petertaiwo034@gmail.com
-      email_cinfigs:
-      - to: petertaiwo034@gmail.com
-        from:
-        smarthost: 
-        auth_username:
-        auth_identity;
-        auth_password:
-        send_resolved: true
-        headers:
+  We will configure prometheus  by creating a new custom yaml file and upgrade by running helm upgrade prometheus prometheus/prometheus
         
-  Under server file you need to configure the alert rules e.g
-  alerting_rules.yml
-    groups:
-    - name: NodeDown
-      rules:
-      #Alert for any instance that is unreachable for >5 minutes
-      - alert: Inastance Down
-        expr: up{job="kubernetes-nodes"} = 0
-        for:2h
-        
-        OR
-        
-   you can use a custom file by vi into promtheus.yaml file and paste the custom yaml script for prometheus in there and run 
+   You will create a custom file by vi into prometheus.yaml file and paste the custom yaml script below in there and run 
   helm ugrade prometheus prometheus/prometheus -f prometheus.yaml. Below is what you can copy into the file you vi into. Make sure you edit to you values
   
   
