@@ -10,7 +10,7 @@ You can run "helm show value prometheus
 if you don't like what is written in it, run this command
 helm show value prometheus > value.yml
 Then vi into value.yml to edit it to what you want
-You can run "helm template apm/prometheus"
+You can run "helm template prometheus"
 heml intsall prometheus "they first name you saw after you search for prometheus" prometheus/prometheus
 If you redirect the show values into another file to install the changes you made in the new file erun this command
 helm install prometheus promethus/prometheus -f value.yml
@@ -20,4 +20,31 @@ helm install prometheus promethus/prometheus
 
 Note if the command above to work dirctly on the apm namespace does not work then if you want to install it you have to pass the namespace:
 helm install prometheus promethus/prometheus -n apm
+
+
+How to install Grafana
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo updates
+helm search repo grafana
+helm show value grafana
+helm template grafana
+heml install grafana "name you want after you ran helm search repo" grafana/grafana -n apm
+
+After installing grafana you will get a long note on the screen numbered 1-3 and the No 1 has the command to run to create grafana secret in which the 
+the password will be passed
+
+Note:
+Run the command kubectl get svc -n apm (use the -n if it was created in a different namespace not default and "apm" here is the name of the namespace
+You will see promethus created a lot of services but the most important to take note so as to be able to access it on the browser using nginx ingress
+1. Prometheus-alertmanager
+2. Prometheus-server
+And for grafana the service to integerate with nginx ingress so as ton access on the browser since a cluster IP was created is: 
+3.Grafana
+
+
+
+To assess this on the browser you have to create a nginx ingress
+Go to route 53 and create A records for the application 
+
+Create a host based ingress.yal file 
 
