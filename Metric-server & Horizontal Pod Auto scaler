@@ -12,7 +12,7 @@ kubectl get deploy -n kube-system
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: php-apache
+  name: springboot
 spec:
   selector:
     matchLabels:
@@ -48,15 +48,15 @@ spec:
     
 #You have to create an horizontal pod auto scaling object
 
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: php-apache
+  name: springhpa1
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: php-apache
+    name: springboot
   minReplicas: 1
   maxReplicas: 10
   metrics:
@@ -66,6 +66,22 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+        
+        
+        For autoscaling/v1 version
+        
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: springhpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: springboot
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
 
 #Deploy a load-generator container:
 kubectl run -i --tty load generator --rm --image=busybox /bin/sh
