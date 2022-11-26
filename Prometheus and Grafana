@@ -3,7 +3,7 @@ Grafana is an open source tool allows you to easily visualize information ( it c
 Prometheus can check for request time 
 To install Prometheus
 Use the command "kubectl create ns apm" to create a namespace
-Use the command "kubectl config set-content --current --namespace=apm" to get into the namespace
+Use the command "kubectl config set-context --current --namespace=apm" to get into the namespace
 helm repo add prometheus https://prometheus-community.github.io/helm-charts
  
 helm search repo prometheus  (select the one that says prometheus/prometheus)
@@ -33,6 +33,8 @@ heml install grafana "name you want after you ran helm search repo" grafana/graf
 
 After installing grafana you will get a long note on the screen numbered 1-3 and the No 1 has the command to run to create grafana secret in which the 
 the password will be passed
+
+kubectl get secret --namespace apm grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 Note:
 Run the command kubectl get svc -n apm (use the -n if it was created in a different namespace not default and "apm" here is the name of the namespace
