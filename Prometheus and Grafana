@@ -76,7 +76,7 @@ spec:
           service:
             name: prometheus-alertmanager ( service name for the application )
             port:
-              number: 80( what port is the application running on)
+              number: 9093 ( what port is the application running on)
   - host: grafana.taiwo.com (input the host name you created for the third application here)
     http:
       paths:
