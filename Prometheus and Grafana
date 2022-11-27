@@ -187,7 +187,9 @@ serverFiles:
   
   
   DASHBOARD
+  
   To access it, move the cursor to the left side of the screen and the fourth diagram that look like a four small square is the dashboard
+  select import
   1. Sample Dash Board IDS: These  are different dashboard IDS created by different developer
   3119, 7249,8919,6417,11074
   2. in the first box that has "import via grafana.com" I can inputany of the number and click on load
