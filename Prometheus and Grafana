@@ -56,6 +56,7 @@ kind: Ingress
 metadata:
   name: ingress-wildcard-host
 spec:
+  ingressClassName: nginx
   rules:
   - host: prometheus server.com (input the host name you created for the first application here)
     http:
